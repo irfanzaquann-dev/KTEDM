@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kolej Tingkatan Enam Desa Mahkota | KTEDM</title>
+<meta name="description" content="Kolej Tingkatan Enam Desa Mahkota (KTEDM) — Melestari Kecemerlangan Ilmuwan. Kolej prauniversiti di Kuala Lumpur.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ================= TOKENS ================= */
+:root{
+  --red:#D6201F;
+  --red-dark:#A5150F;
+  --blue:#122A5E;
+  --blue-light:#20418C;
+  --gold:#F0B429;
+  --gold-light:#FCE29A;
+  --ink:#15171C;
+  --paper:#F7F7F5;
+  --paper-dim:#EFEFEA;
+  --white:#FFFFFF;
+  --line: rgba(18,42,94,0.14);
+  --shadow: 0 20px 50px -20px rgba(18,42,94,0.35);
+  --serif: 'Fraunces', serif;
+  --sans: 'IBM Plex Sans', sans-serif;
+  --mono: 'IBM Plex Mono', monospace;
+  --ease: cubic-bezier(.16,.84,.44,1);
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  font-family:var(--sans);
+  background:var(--paper);
+  color:var(--ink);
+  overflow-x:hidden;
+}
+img{max-width:100%;display:block;}
+a{color:inherit;text-decoration:none;}
+h1,h2,h3,h4{font-family:var(--serif);margin:0;letter-spacing:-0.01em;}
+p{margin:0;}
+.container{max-width:1180px;margin:0 auto;padding:0 28px;}
+.eyebrow{
+  font-family:var(--mono);
+  font-size:12px;
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+  color:var(--red);
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom:14px;
+}
+.eyebrow::before{
+  content:'';
+  width:24px;height:2px;background:var(--gold);
+  display:inline-block;
+}
+section{padding:110px 0;position:relative;}
+@media(max-width:760px){section{padding:70px 0;}}
+
+/* reveal on scroll */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .8s var(--ease), transform .8s var(--ease);}
+.reveal.in{opacity:1;transform:translateY(0);}
+@media (prefers-reduced-motion: reduce){
+  .reveal{opacity:1;transform:none;transition:none;}
+  html{scroll-behavior:auto;}
+}
+
+/* ================= NAV ================= */
+header{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  background:rgba(247,247,245,0.85);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid transparent;
+  transition:border-color .3s, background .3s;
+}
+header.scrolled{border-bottom-color:var(--line);background:rgba(247,247,245,0.96);}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:14px 28px;max-width:1180px;margin:0 auto;}
+.brand{display:flex;align-items:center;gap:12px;}
+.brand img{width:42px;height:auto;filter:drop-shadow(0 2px 6px rgba(0,0,0,.25));}
+.brand-text{line-height:1.15;}
+.brand-text .name{font-family:var(--serif);font-weight:700;font-size:16px;color:var(--blue);}
+.brand-text .sub{font-family:var(--mono);font-size:10px;letter-spacing:.08em;color:var(--red);text-transform:uppercase;}
+nav.links{display:flex;gap:30px;align-items:center;}
+nav.links a{
+  font-size:14px;font-weight:500;color:var(--ink);position:relative;padding:4px 0;
+}
+nav.links a::after{
+  content:'';position:absolute;left:0;bottom:0;width:0;height:2px;background:var(--red);transition:width .3s var(--ease);
+}
+nav.links a:hover::after,nav.links a.active::after{width:100%;}
+.lang-toggle{
+  font-family:var(--mono);font-size:12px;font-weight:500;
+  border:1.5px solid var(--blue);border-radius:20px;
+  display:flex;overflow:hidden;cursor:pointer;
+}
+.lang-toggle span{padding:6px 14px;transition:.25s;}
+.lang-toggle span.active{background:var(--blue);color:var(--white);}
+.burger{display:none;flex-direction:column;gap:5px;cursor:pointer;}
+.burger span{width:24px;height:2px;background:var(--ink);}
+@media(max-width:900px){
+  nav.links{position:fixed;top:70px;left:0;right:0;background:var(--paper);flex-direction:column;padding:20px 28px 30px;border-bottom:1px solid var(--line);transform:translateY(-130%);transition:transform .4s var(--ease);gap:18px;align-items:flex-start;}
+  nav.links.open{transform:translateY(0);}
+  .burger{display:flex;}
+}
+
+/* ================= HERO ================= */
+.hero{
+  min-height:100vh;
+  display:flex;align-items:center;
+  padding-top:110px;
+  background:
+    radial-gradient(circle at 85% 20%, rgba(240,180,41,0.16), transparent 55%),
+    radial-gradient(circle at 10% 90%, rgba(18,42,94,0.12), transparent 50%),
+    var(--paper);
+  position:relative;
+}
+.hero-grid{display:grid;grid-template-columns:1.15fr 0.85fr;gap:60px;align-items:center;}
+@media(max-width:900px){.hero-grid{grid-template-columns:1fr;gap:50px;}}
+.hero h1{font-size:clamp(38px,5.2vw,64px);line-height:1.04;color:var(--blue);font-weight:700;}
+.hero h1 em{font-style:italic;font-weight:500;color:var(--red);}
+.hero .motto{
+  font-family:var(--mono);font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);opacity:.7;margin-top:22px;
+}
+.hero p.lead{font-size:17px;line-height:1.65;color:#3b3f4a;max-width:520px;margin-top:20px;}
+.hero-ctas{display:flex;gap:16px;margin-top:34px;flex-wrap:wrap;}
+.btn{
+  font-family:var(--sans);font-weight:600;font-size:14px;
+  padding:14px 26px;border-radius:2px;display:inline-block;
+  transition:transform .3s var(--ease), box-shadow .3s var(--ease);
+}
+.btn-primary{background:var(--red);color:var(--white);box-shadow:0 10px 24px -8px rgba(214,32,31,.55);}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 16px 30px -8px rgba(214,32,31,.6);}
+.btn-outline{border:1.5px solid var(--blue);color:var(--blue);}
+.btn-outline:hover{background:var(--blue);color:var(--white);}
+
+/* 3D badge */
+.badge-stage{perspective:1200px;display:flex;justify-content:center;align-items:center;}
+.badge-wrap{
+  width:min(360px,80vw);
+  transform-style:preserve-3d;
+  transition:transform .1s linear;
+  cursor:grab;
+}
+.badge-wrap:active{cursor:grabbing;}
+.badge-wrap img{
+  border-radius:6px;
+  filter:drop-shadow(0 30px 45px rgba(18,42,94,.4));
+}
+.badge-hint{
+  text-align:center;font-family:var(--mono);font-size:11px;color:var(--blue);opacity:.55;margin-top:14px;letter-spacing:.06em;
+}
+
+/* ================= HISTORY TIMELINE ================= */
+.timeline{position:relative;margin-top:60px;padding-left:20px;}
+.timeline::before{content:'';position:absolute;left:20px;top:6px;bottom:6px;width:2px;background:linear-gradient(var(--gold),var(--blue));}
+.t-item{position:relative;padding-left:44px;margin-bottom:48px;}
+.t-item:last-child{margin-bottom:0;}
+.t-dot{position:absolute;left:12px;top:4px;width:18px;height:18px;border-radius:50%;background:var(--paper);border:3px solid var(--red);}
+.t-year{font-family:var(--mono);color:var(--red);font-size:13px;letter-spacing:.05em;margin-bottom:6px;display:block;}
+.t-item h4{font-size:20px;color:var(--blue);margin-bottom:8px;}
+.t-item p{color:#444;line-height:1.6;font-size:15px;max-width:640px;}
+.feeder-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+.feeder-list span{
+  font-family:var(--mono);font-size:11.5px;background:var(--paper-dim);border:1px solid var(--line);padding:5px 10px;border-radius:3px;color:#333;
+}
+
+/* ================= TWO COL SECTION HEAD ================= */
+.section-head{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;margin-bottom:50px;flex-wrap:wrap;}
+.section-head h2{font-size:clamp(28px,3.4vw,42px);color:var(--blue);}
+.section-head .desc{max-width:380px;color:#4a4e59;font-size:15px;line-height:1.6;}
+
+/* ================= PHILOSOPHY CARDS ================= */
+.card-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
+@media(max-width:900px){.card-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:520px){.card-grid{grid-template-columns:1fr;}}
+.p-card{background:var(--white);padding:34px 26px;transition:background .3s;}
+.p-card:hover{background:var(--paper-dim);}
+.p-card .tag{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--red);margin-bottom:16px;display:block;}
+.p-card h4{font-size:19px;color:var(--blue);margin-bottom:12px;}
+.p-card p{font-size:14px;line-height:1.6;color:#444;}
+
+/* ================= BADGE MEANING ================= */
+.meaning-wrap{display:grid;grid-template-columns:0.9fr 1.1fr;gap:60px;align-items:center;}
+@media(max-width:860px){.meaning-wrap{grid-template-columns:1fr;}}
+.swatches{display:flex;gap:14px;margin-bottom:30px;flex-wrap:wrap;}
+.swatch{
+  width:56px;height:56px;border-radius:50%;cursor:pointer;
+  border:3px solid var(--white);box-shadow:0 4px 14px rgba(0,0,0,.18);
+  transition:transform .25s var(--ease);
+  position:relative;
+}
+.swatch:hover{transform:translateY(-6px) scale(1.05);}
+.swatch.active{outline:3px solid var(--blue);outline-offset:3px;}
+.meaning-display{
+  background:var(--white);border:1px solid var(--line);padding:28px 30px;min-height:150px;
+  border-left:5px solid var(--red);
+}
+.meaning-display h4{color:var(--blue);font-size:20px;margin-bottom:10px;}
+.meaning-display p{font-size:15px;line-height:1.6;color:#333;}
+.symbols{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;}
+.sym-card{background:var(--white);border:1px solid var(--line);padding:20px;text-align:center;cursor:pointer;transition:.25s;}
+.sym-card:hover{border-color:var(--gold);background:var(--gold-light);}
+.sym-card .ic{font-size:28px;margin-bottom:8px;}
+.sym-card .lbl{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--blue);}
+
+/* ================= PROGRAMS ================= */
+.tabs{display:flex;gap:10px;margin-bottom:36px;flex-wrap:wrap;}
+.tab-btn{
+  font-family:var(--mono);font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;
+  padding:10px 20px;border:1.5px solid var(--blue);color:var(--blue);cursor:pointer;background:transparent;transition:.25s;
+}
+.tab-btn.active,.tab-btn:hover{background:var(--blue);color:var(--white);}
+.tab-panel{display:none;}
+.tab-panel.active{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+@media(max-width:900px){.tab-panel.active{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:600px){.tab-panel.active{grid-template-columns:1fr;}}
+.pkg-card{
+  background:var(--white);border:1px solid var(--line);padding:22px;position:relative;overflow:hidden;
+}
+.pkg-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:var(--gold);}
+.pkg-card .num{font-family:var(--mono);font-size:11px;color:var(--red);margin-bottom:10px;display:block;}
+.pkg-card .subs{font-size:14.5px;line-height:1.7;color:#333;}
+.pkg-card .subs b{color:var(--blue);}
+
+/* ================= GALLERY ================= */
+.gal-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
+@media(max-width:900px){.gal-grid{grid-template-columns:repeat(2,1fr);}}
+.gal-item{position:relative;overflow:hidden;aspect-ratio:4/3;background:var(--paper-dim);}
+.gal-item img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease);}
+.gal-item:hover img{transform:scale(1.08);}
+.gal-cap{
+  position:absolute;bottom:0;left:0;right:0;padding:10px 12px;
+  background:linear-gradient(transparent,rgba(18,42,94,.85));
+  color:var(--white);font-family:var(--mono);font-size:11px;letter-spacing:.04em;
+  transform:translateY(100%);transition:transform .3s var(--ease);
+}
+.gal-item:hover .gal-cap{transform:translateY(0);}
+
+/* ================= CHARTER ================= */
+.charter-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:16px 40px;}
+@media(max-width:760px){.charter-list{grid-template-columns:1fr;}}
+.charter-list li{display:flex;gap:14px;font-size:15px;line-height:1.55;color:#333;}
+.charter-list li .chk{
+  flex:none;width:24px;height:24px;border-radius:50%;background:var(--blue);color:var(--white);
+  display:flex;align-items:center;justify-content:center;font-size:13px;font-family:var(--mono);margin-top:1px;
+}
+
+/* ================= LEADERSHIP ================= */
+.lead-wrap{display:grid;grid-template-columns:0.8fr 1.2fr;gap:50px;align-items:center;background:var(--blue);color:var(--white);padding:60px;}
+@media(max-width:860px){.lead-wrap{grid-template-columns:1fr;padding:40px 28px;}}
+.lead-wrap img{border-radius:4px;box-shadow:0 30px 50px -15px rgba(0,0,0,.5);}
+.lead-quote{font-family:var(--serif);font-style:italic;font-size:22px;line-height:1.5;color:var(--white);}
+.lead-quote::before{content:'"';color:var(--gold);font-size:40px;line-height:0;vertical-align:-14px;margin-right:4px;}
+.lead-name{margin-top:26px;font-family:var(--mono);font-size:13px;letter-spacing:.06em;color:var(--gold);}
+.lead-name .role{display:block;color:rgba(255,255,255,.7);font-size:12px;margin-top:3px;}
+
+/* ================= CONTACT ================= */
+.contact-wrap{display:grid;grid-template-columns:1fr 1fr;gap:50px;}
+@media(max-width:860px){.contact-wrap{grid-template-columns:1fr;}}
+.contact-info dt{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--red);margin-top:22px;}
+.contact-info dt:first-child{margin-top:0;}
+.contact-info dd{margin:6px 0 0;font-size:15.5px;color:var(--ink);line-height:1.5;}
+.map-frame{border:1px solid var(--line);height:100%;min-height:320px;filter:grayscale(.15);}
+.map-frame iframe{width:100%;height:100%;min-height:320px;border:0;}
+
+/* ================= FOOTER ================= */
+footer{background:var(--ink);color:rgba(255,255,255,.65);padding:40px 0;font-size:13px;}
+.foot-row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;}
+footer a:hover{color:var(--gold);}
+.foot-badge{width:30px;opacity:.85;}
+.foot-brand{display:flex;align-items:center;gap:10px;color:rgba(255,255,255,.85);font-family:var(--mono);font-size:12px;}
+
+/* language visibility */
+[data-bm]{display:inline;}
+[data-en]{display:none;}
+body.lang-en [data-bm]{display:none;}
+body.lang-en [data-en]{display:inline;}
+.block[data-bm]{display:block;}
+.block[data-en]{display:none;}
+body.lang-en .block[data-bm]{display:none;}
+body.lang-en .block[data-en]{display:block;}
+</style>
+</head>
+<body>
+
+<header id="siteHeader">
+  <div class="nav">
+    <a href="#top" class="brand">
+      <img src="assets/logo.jpg" alt="Lencana KTEDM">
+      <div class="brand-text">
+        <div class="name">KTEDM</div>
+        <div class="sub" data-bm>Desa Mahkota</div>
+        <div class="sub" data-en>Desa Mahkota</div>
+      </div>
+    </a>
+    <nav class="links" id="navLinks">
+      <a href="#tentang" data-bm>Tentang</a><a href="#tentang" data-en>About</a>
+      <a href="#akademik" data-bm>Akademik</a><a href="#akademik" data-en>Academics</a>
+      <a href="#kampus" data-bm>Kampus</a><a href="#kampus" data-en>Campus</a>
+      <a href="#pasukan" data-bm>Pasukan Kami</a><a href="#pasukan" data-en>Our Team</a>
+      <a href="#hubungi" data-bm>Hubungi</a><a href="#hubungi" data-en>Contact</a>
+      <div class="lang-toggle" id="langToggle"><span class="active" data-l="bm">BM</span><span data-l="en">EN</span></div>
+    </nav>
+    <div class="burger" id="burger"><span></span><span></span><span></span></div>
+  </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="hero" id="top">
+  <div class="container hero-grid">
+    <div>
+      <div class="eyebrow" data-bm>Kolej Tingkatan Enam · Kuala Lumpur</div>
+      <div class="eyebrow" data-en>Sixth Form College · Kuala Lumpur</div>
+      <h1 data-bm>Melestari <em>Kecemerlangan</em><br>Ilmuwan</h1>
+      <h1 data-en>Sustaining <em>Excellence</em><br>in Scholarship</h1>
+      <p class="lead" data-bm>Kolej Tingkatan Enam Desa Mahkota (KTEDM) membentuk pelajar lepasan SPM menjadi insan seimbang — intelek, rohani, emosi dan jasmani — bersedia untuk pendidikan tinggi dan cabaran dunia sebenar.</p>
+      <p class="lead" data-en>Kolej Tingkatan Enam Desa Mahkota (KTEDM) shapes SPM graduates into balanced individuals — intellectually, spiritually, emotionally and physically — ready for higher education and the real world.</p>
+      <div class="motto">"Melestari Kecemerlangan Ilmuwan"</div>
+      <div class="hero-ctas">
+        <a href="#akademik" class="btn btn-primary" data-bm>Lihat Pakej Akademik</a>
+        <a href="#akademik" class="btn btn-primary" data-en>View Academic Packages</a>
+        <a href="#hubungi" class="btn btn-outline" data-bm>Hubungi Kolej</a>
+        <a href="#hubungi" class="btn btn-outline" data-en>Contact College</a>
+      </div>
+    </div>
+    <div>
+      <div class="badge-stage">
+        <div class="badge-wrap" id="badge3d">
+          <img src="assets/logo.jpg" alt="Lencana Kolej Tingkatan Enam Desa Mahkota">
+        </div>
+      </div>
+      <div class="badge-hint" data-bm>— seret untuk putar lencana —</div>
+      <div class="badge-hint" data-en>— drag to rotate the badge —</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TENTANG / HISTORY ================= -->
+<section id="tentang">
+  <div class="container">
+    <div class="section-head reveal">
+      <div>
+        <div class="eyebrow" data-bm>Sejarah</div>
+        <div class="eyebrow" data-en>History</div>
+        <h2 data-bm>Dari SMK Desa Mahkota<br>ke Kolej Tingkatan Enam</h2>
+        <h2 data-en>From SMK Desa Mahkota<br>to a Sixth Form College</h2>
+      </div>
+      <p class="desc" data-bm>Perjalanan kolej ini bermula sebagai sekolah menengah biasa sebelum dinaiktaraf menjadi pusat pengajian Tingkatan 6 yang tersendiri.</p>
+      <p class="desc" data-en>The college's journey began as a regular secondary school before being upgraded into a dedicated Form 6 institution.</p>
+    </div>
+
+    <div class="timeline">
+      <div class="t-item reveal">
+        <div class="t-dot"></div>
+        <span class="t-year">31 MAC 2014</span>
+        <h4 data-bm>SMK Desa Mahkota mula beroperasi</h4>
+        <h4 data-en>SMK Desa Mahkota begins operations</h4>
+        <p data-bm>Menempatkan pelajar-pelajar Tingkatan 6 sedia ada daripada 4 buah sekolah berhampiran:</p>
+        <p data-en>Housing existing Form 6 students transferred from 4 nearby schools:</p>
+        <div class="feeder-list">
+          <span>SMK Kepong Baru</span><span>SMK Raja Ali</span><span>SMK Raja Abdullah</span><span>SMK Jinjang</span>
+        </div>
+      </div>
+      <div class="t-item reveal">
+        <div class="t-dot"></div>
+        <span class="t-year">27 APRIL 2015</span>
+        <h4 data-bm>Pemusatan lanjutan</h4>
+        <h4 data-en>Further centralisation</h4>
+        <p data-bm>Dua lagi sekolah dipusatkan ke Kolej Tingkatan Enam Desa Mahkota:</p>
+        <p data-en>Two more schools were centralised into the college:</p>
+        <div class="feeder-list">
+          <span>SMK Batu Muda</span><span>SMK Taman Tun Dr. Ismail</span>
+        </div>
+      </div>
+      <div class="t-item reveal">
+        <div class="t-dot"></div>
+        <span class="t-year">22 MEI 2016</span>
+        <h4 data-bm>Dinaiktaraf menjadi Kolej Tingkatan Enam</h4>
+        <h4 data-en>Upgraded to a Sixth Form College</h4>
+        <p data-bm>SMK Desa Mahkota rasmi dinaiktaraf dan menerima nama barunya: Kolej Tingkatan Enam Desa Mahkota. Sejak pengambilan 6 Bawah 2014, kolej turut menerima pelajar lepasan SPM daripada 18 buah sekolah berhampiran.</p>
+        <p data-en>SMK Desa Mahkota was formally upgraded, taking on its new name: Kolej Tingkatan Enam Desa Mahkota. Since the 2014 Lower Six intake, the college has also welcomed SPM graduates from 18 nearby schools.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PHILOSOPHY ================= -->
+<section style="background:var(--white);border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
+  <div class="container">
+    <div class="section-head reveal">
+      <div>
+        <div class="eyebrow" data-bm>Falsafah &amp; Hala Tuju</div>
+        <div class="eyebrow" data-en>Philosophy &amp; Direction</div>
+        <h2 data-bm>Matlamat-Matlamat Kolej</h2>
+        <h2 data-en>Our Guiding Principles</h2>
+      </div>
+    </div>
+    <div class="card-grid reveal">
+      <div class="p-card">
+        <span class="tag" data-bm>Falsafah</span><span class="tag" data-en>Philosophy</span>
+        <h4 data-bm>Insan Seimbang</h4><h4 data-en>The Balanced Individual</h4>
+        <p data-bm>Memperkembangkan potensi individu secara seimbang dan bersepadu — intelek, rohani, emosi dan jasmani — bagi melahirkan insan yang harmonis dan berakhlak mulia.</p>
+        <p data-en>Developing individual potential in a balanced, integrated way — intellect, spirit, emotion and physicality — to shape harmonious individuals of noble character.</p>
+      </div>
+      <div class="p-card">
+        <span class="tag" data-bm>Visi</span><span class="tag" data-en>Vision</span>
+        <h4 data-bm>Negara Sejahtera</h4><h4 data-en>A Prosperous Nation</h4>
+        <p data-bm>Pendidikan Berkualiti, Insan Terdidik, Negara Sejahtera.</p>
+        <p data-en>Quality Education, Educated Individuals, a Prosperous Nation.</p>
+      </div>
+      <div class="p-card">
+        <span class="tag" data-bm>Misi</span><span class="tag" data-en>Mission</span>
+        <h4 data-bm>Melestari Sistem</h4><h4 data-en>Sustaining the System</h4>
+        <p data-bm>Melestarikan sistem pendidikan berkualiti untuk membangunkan potensi individu bagi memenuhi aspirasi negara.</p>
+        <p data-en>Sustaining a quality education system that develops individual potential to fulfil the nation's aspirations.</p>
+      </div>
+      <div class="p-card">
+        <span class="tag" data-bm>Moto</span><span class="tag" data-en>Motto</span>
+        <h4 data-bm>Melestari Kecemerlangan Ilmuwan</h4><h4 data-en>Sustaining Scholarly Excellence</h4>
+        <p data-bm>Semangat yang menjadi teras kepada setiap warga KTEDM dalam menuntut dan menyebarkan ilmu.</p>
+        <p data-en>The spirit at the core of every KTEDM member in seeking and spreading knowledge.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= BADGE MEANING ================= -->
+<section>
+  <div class="container">
+    <div class="section-head reveal">
+      <div>
+        <div class="eyebrow" data-bm>Lencana Kolej</div>
+        <div class="eyebrow" data-en>The College Badge</div>
+        <h2 data-bm>Setiap Warna, Setiap Objek<br>Membawa Makna</h2>
+        <h2 data-en>Every Colour, Every Object<br>Carries Meaning</h2>
+      </div>
+      <p class="desc" data-bm>Klik pada warna atau objek untuk meneroka maksud di sebalik lencana rasmi kolej.</p>
+      <p class="desc" data-en>Click a colour or object to explore the meaning behind the college's official badge.</p>
+    </div>
+
+    <div class="meaning-wrap reveal">
+      <div>
+        <div class="swatches" id="swatches">
+          <div class="swatch active" style="background:#1E3A6E" data-key="blue"></div>
+          <div class="swatch" style="background:#D6201F" data-key="red"></div>
+          <div class="swatch" style="background:#F0B429" data-key="gold"></div>
+          <div class="swatch" style="background:#FFFFFF;border:2px solid #ddd;" data-key="white"></div>
+          <div class="swatch" style="background:#111" data-key="black"></div>
+        </div>
+        <div class="meaning-display" id="meaningDisplay">
+          <h4 data-bm>Biru</h4><h4 data-en>Blue</h4>
+          <p data-bm>Bermaksud perpaduan semua warga Kolej Tingkatan Enam Desa Mahkota.</p>
+          <p data-en>Represents the unity of all members of the KTEDM community.</p>
+        </div>
+      </div>
+      <div class="symbols" id="symbols">
+        <div class="sym-card" data-key="buku">
+          <div class="ic">📖</div>
+          <div class="lbl" data-bm>Buku</div><div class="lbl" data-en>Book</div>
+        </div>
+        <div class="sym-card" data-key="skrol">
+          <div class="ic">📜</div>
+          <div class="lbl" data-bm>Skrol</div><div class="lbl" data-en>Scroll</div>
+        </div>
+        <div class="sym-card" data-key="mortar">
+          <div class="ic">🎓</div>
+          <div class="lbl" data-bm>Mortar Board</div><div class="lbl" data-en>Mortar Board</div>
+        </div>
+        <div class="sym-card" data-key="perisai">
+          <div class="ic">🛡️</div>
+          <div class="lbl" data-bm>Perisai</div><div class="lbl" data-en>Shield</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= AKADEMIK / PROGRAMS ================= -->
+<section id="akademik" style="background:var(--white);border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
+  <div class="container">
+    <div class="section-head reveal">
+      <div>
+        <div class="eyebrow" data-bm>Kursus Kolej</div>
+        <div class="eyebrow" data-en>Academic Programmes</div>
+        <h2 data-bm>Pakej Mata Pelajaran</h2>
+        <h2 data-en>Subject Packages</h2>
+      </div>
+      <p class="desc" data-bm>Tiga aliran utama disediakan mengikut minat dan kelayakan pelajar.</p>
+      <p class="desc" data-en>Three main streams are offered according to student interest and eligibility.</p>
+    </div>
+
+    <div class="tabs reveal">
+      <button class="tab-btn active" data-tab="sains" data-bm>Aliran Sains</button>
+      <button class="tab-btn active" data-tab="sains" data-en>Science Stream</button>
+      <button class="tab-btn" data-tab="kemanusiaan" data-bm>Aliran Kemanusiaan</button>
+      <button class="tab-btn" data-tab="kemanusiaan" data-en>Humanities Stream</button>
+      <button class="tab-btn" data-tab="agama" data-bm>Aliran Agama</button>
+      <button class="tab-btn" data-tab="agama" data-en>Religious Stream</button>
+    </div>
+
+    <div class="tab-panel active" data-panel="sains">
+      <div class="pkg-card"><span class="num">01</span><div class="subs">Peng-Am | MUET | Maths T | <b>Chemistry</b> | Biology</div></div>
+      <div class="pkg-card"><span class="num">02</span><div class="subs">Peng-Am | MUET | Maths T | <b>Chemistry</b> | Physics</div></div>
+      <div class="pkg-card"><span class="num">03</span><div class="subs">Peng-Am | MUET | Maths T | <b>Chemistry</b> | ICT</div></div>
+    </div>
+    <div class="tab-panel" data-panel="kemanusiaan">
+      <div class="pkg-card"><span class="num">01</span><div class="subs">Peng-Am | MUET | Maths M | Perakaunan | <b>Ekonomi</b></div></div>
+      <div class="pkg-card"><span class="num">02</span><div class="subs">Peng-Am | MUET | Maths M | Peng-Perniagaan/ICT | <b>Perakaunan</b></div></div>
+      <div class="pkg-card"><span class="num">03</span><div class="subs">Peng-Am | MUET | Perakaunan | Peng-Perniagaan | <b>Ekonomi</b></div></div>
+      <div class="pkg-card"><span class="num">04</span><div class="subs">Peng-Am | MUET | Sejarah | Ekonomi | <b>Peng-Perniagaan</b></div></div>
+      <div class="pkg-card"><span class="num">05</span><div class="subs">Peng-Am | MUET | Sejarah | Bahasa Melayu | <b>Ekonomi</b></div></div>
+      <div class="pkg-card"><span class="num">06</span><div class="subs">Peng-Am | MUET | Sejarah | Bahasa Melayu | <b>Peng-Perniagaan</b></div></div>
+      <div class="pkg-card"><span class="num">07</span><div class="subs">Peng-Am | MUET | Bahasa Melayu | Peng-Perniagaan | <b>Ekonomi</b></div></div>
+      <div class="pkg-card"><span class="num">08</span><div class="subs">Peng-Am | MUET | Bahasa Melayu | Peng-Perniagaan | <b>Seni Visual/Sains Sukan</b></div></div>
+    </div>
+    <div class="tab-panel" data-panel="agama">
+      <div class="pkg-card"><span class="num">01</span><div class="subs">Peng-Am | MUET | Sejarah | Bahasa Arab | <b>Syariah</b></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CAMPUS / GALLERY ================= -->
+<section id="kampus">
+  <div class="container">
+    <div class="section-head reveal">
+      <div>
+        <div class="eyebrow" data-bm>Persekitaran Kolej</div>
+        <div class="eyebrow" data-en>Campus Facilities</div>
+        <h2 data-bm>Kemudahan di Kampus</h2>
+        <h2 data-en>Facilities on Campus</h2>
+      </div>
+    </div>
+    <div class="gal-grid reveal">
+      <div class="gal-item"><img src="https://i0.wp.com/kt6dm.wordpress.com/wp-content/uploads/2018/02/ktedm461.jpg?w=406&h=304&ssl=1" loading="lazy" alt="Pintu besar kolej"><div class="gal-cap" data-bm>Pintu Besar Kolej</div><div class="gal-cap" data-en>Main Gate</div></div>
+      <div class="gal-item"><img src="https://i0.wp.com/kt6dm.wordpress.com/wp-content/uploads/2018/02/ktedm66.jpg?w=406&h=304&ssl=1" loading="lazy" alt="Dewan kolej"><div class="gal-cap" data-bm>Dewan Kolej</div><div class="gal-cap" data-en>College Hall</div></div>
+      <div class="gal-item"><img src="https://i0.wp.com/kt6dm.wordpress.com/wp-content/uploads/2018/01/ktedm22.jpg?w=406&h=304&ssl=1" loading="lazy" alt="Kantin kolej"><div class="gal-cap" data-bm>Kantin Kolej</div><div class="gal-cap" data-en>Canteen</div></div>
+      <div class="gal-item"><img src="https://i0.wp.com/kt6dm.wordpress.com/wp-content/uploads/2018/01/ktedm41.jpg?w=406&h=304&ssl=1" loading="lazy" alt="Pusat sumber"><div class="gal-cap" data-bm>Pusat Sumber</div><div class="gal-cap" data-en>Resource Centre</div></div>
+      <div class="gal-item"><img src="https://i0.wp.com/kt6dm.wordpress.com/wp-content/uploads/2018/01/ktedm17.jpg?w=406&h=304&ssl=1" loading="lazy" alt="Bilik komputer"><div class="gal-cap" data-bm>Bilik Komputer</div><div class="gal-cap" data-en>Computer Lab</div></div>
+      <div class="gal-item"><img src="https://i0.wp.com/kt6dm.wordpress.com/wp-content/uploads/2018/01/ktedm10.jpg?w=406&h=304&ssl=1" loading="lazy" alt="Bilik kaunseling"><div class="gal-cap" data-bm>Bilik Kaunseling</div><div class="gal-cap" data-en>Counselling Room</div></div>
+      <div class="gal-item"><img src="https://i0.wp.com/kt6dm.wordpress.com/wp-content/uploads/2018/01/ktedm25.jpg?w=406&h=304&ssl=1" loading="lazy" alt="Kebun mini"><div class="gal-cap" data-bm>Kebun Mini</div><div class="gal-cap" data-en>Mini Garden</div></div>
+      <div class="gal-item"><img src="https://i0.wp.com/kt6dm.wordpress.com/wp-content/uploads/2018/01/ktedm05.jpg?w=406&h=304&ssl=1" loading="lazy" alt="Kawasan luar kolej"><div class="gal-cap" data-bm>Kawasan Luar</div><div class="gal-cap" data-en>Outdoor Grounds</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CLIENT CHARTER ================= -->
+<section style="background:var(--white);border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
+  <div class="container">
+    <div class="section-head reveal">
+      <div>
+        <div class="eyebrow" data-bm>Piagam Pelanggan</div>
+        <div class="eyebrow" data-en>Client Charter</div>
+        <h2 data-bm>Janji Kami</h2>
+        <h2 data-en>Our Commitment</h2>
+      </div>
+      <p class="desc" data-bm>Warga pendidik KTEDM berikrar menumpukan seluruh usaha untuk:</p>
+      <p class="desc" data-en>KTEDM's educators pledge their full effort towards:</p>
+    </div>
+    <ul class="charter-list reveal">
+      <li><span class="chk">✓</span><span data-bm>Memberi perkhidmatan berkualiti dengan layanan mesra dan penyayang.</span><span data-en>Providing quality service with a warm and caring approach.</span></li>
+      <li><span class="chk">✓</span><span data-bm>Mengamalkan budaya kerja cemerlang, positif dan efektif.</span><span data-en>Practising an excellent, positive and effective work culture.</span></li>
+      <li><span class="chk">✓</span><span data-bm>Memastikan pencapaian cemerlang dalam akademik dan kokurikulum.</span><span data-en>Ensuring excellent achievement in academics and co-curriculum.</span></li>
+      <li><span class="chk">✓</span><span data-bm>Mewujudkan disiplin tinggi dalam kalangan pelajar, guru dan staf.</span><span data-en>Fostering high discipline among students, teachers and staff.</span></li>
+      <li><span class="chk">✓</span><span data-bm>Mewujudkan suasana pembelajaran yang kondusif.</span><span data-en>Creating a conducive learning environment.</span></li>
+      <li><span class="chk">✓</span><span data-bm>Memastikan proses pembelajaran yang berkesan bagi setiap pelajar.</span><span data-en>Ensuring an effective learning process for every student.</span></li>
+      <li><span class="chk">✓</span><span data-bm>Memastikan setiap pelajar bersahsiah dan berakhlak mulia.</span><span data-en>Ensuring every student has good character and noble conduct.</span></li>
+      <li><span class="chk">✓</span><span data-bm>Mewujudkan semangat perpaduan yang tinggi dalam kalangan warga sekolah.</span><span data-en>Fostering a strong spirit of unity among the college community.</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= LEADERSHIP ================= -->
+<section id="pasukan">
+  <div class="container">
+    <div class="lead-wrap reveal">
+      <img src="https://kt6dm.wordpress.com/wp-content/uploads/2020/07/img_6477.jpg?w=500" loading="lazy" alt="Pengetua KTEDM">
+      <div>
+        <div class="eyebrow" style="color:var(--gold);" data-bm>Pasukan Kami</div>
+        <div class="eyebrow" style="color:var(--gold);" data-en>Our Team</div>
+        <p class="lead-quote" data-bm>Mind is never a problem. Mindset is.</p>
+        <p class="lead-quote" data-en>Mind is never a problem. Mindset is.</p>
+        <p style="margin-top:20px;color:rgba(255,255,255,.85);font-size:15px;line-height:1.65;" data-bm>Saya berharap agar semua warga KTEDM Bumi Bertuah dapat berganding bahu dan mendukung semangat "Kerjasama Sepasukan" serta menjiwai prinsip "Kebersamaan" demi mengangkat martabat pendidikan dan memperkasakan kecemerlangan kolej ini.</p>
+        <p style="margin-top:20px;color:rgba(255,255,255,.85);font-size:15px;line-height:1.65;" data-en>I hope every member of KTEDM Bumi Bertuah can stand shoulder to shoulder, upholding the spirit of "Teamwork" and the principle of "Togetherness" — to raise the standard of education and strengthen this college's excellence.</p>
+        <div class="lead-name">MOHD YUSOF BIN IBRAHIM<span class="role" data-bm>Pengetua, Kolej Tingkatan Enam Desa Mahkota</span><span class="role" data-en>Principal, Kolej Tingkatan Enam Desa Mahkota</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section id="hubungi" style="background:var(--white);border-top:1px solid var(--line);">
+  <div class="container">
+    <div class="section-head reveal">
+      <div>
+        <div class="eyebrow" data-bm>Hubungi Kami</div>
+        <div class="eyebrow" data-en>Contact Us</div>
+        <h2 data-bm>Carilah Kita</h2>
+        <h2 data-en>Find Us</h2>
+      </div>
+    </div>
+    <div class="contact-wrap reveal">
+      <dl class="contact-info">
+        <dt data-bm>Alamat</dt><dt data-en>Address</dt>
+        <dd>Jalan Sri Bintang Utama, Desa ParkCity, 52200 Kuala Lumpur</dd>
+        <dt data-bm>Telefon</dt><dt data-en>Phone</dt>
+        <dd>03-6270 1480 / 03-6270 1491</dd>
+        <dt data-bm>Faks</dt><dt data-en>Fax</dt>
+        <dd>03-6270 1662</dd>
+        <dt data-bm>Emel</dt><dt data-en>Email</dt>
+        <dd>wea0256@moe.edu.my</dd>
+        <dt>Facebook</dt>
+        <dd>KTE Desa Mahkota</dd>
+      </dl>
+      <div class="map-frame">
+        <iframe src="https://maps.google.com/maps?q=Jalan%20Sri%20Bintang%20Utama%2C%20Desa%20ParkCity%2C%2052200%20Kuala%20Lumpur&t=&z=15&ie=UTF8&iwloc=&output=embed" loading="lazy" title="Peta Lokasi KTEDM"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container foot-row">
+    <div class="foot-brand"><img class="foot-badge" src="assets/logo.jpg" alt="KTEDM">KOLEJ TINGKATAN ENAM DESA MAHKOTA</div>
+    <div data-bm>&copy; 2026 KTEDM. Hak cipta terpelihara.</div>
+    <div data-en>&copy; 2026 KTEDM. All rights reserved.</div>
+  </div>
+</footer>
+
+<script>
+// ---------- language toggle ----------
+const langToggle = document.getElementById('langToggle');
+langToggle.addEventListener('click',(e)=>{
+  const target = e.target.closest('span');
+  if(!target) return;
+  const lang = target.dataset.l;
+  document.querySelectorAll('#langToggle span').forEach(s=>s.classList.remove('active'));
+  target.classList.add('active');
+  document.body.classList.toggle('lang-en', lang==='en');
+  document.documentElement.lang = lang==='en' ? 'en' : 'ms';
+});
+
+// ---------- mobile nav ----------
+const burger = document.getElementById('burger');
+const navLinks = document.getElementById('navLinks');
+burger.addEventListener('click',()=>navLinks.classList.toggle('open'));
+navLinks.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>navLinks.classList.remove('open')));
+
+// ---------- header scroll state ----------
+const header = document.getElementById('siteHeader');
+window.addEventListener('scroll',()=>{
+  header.classList.toggle('scrolled', window.scrollY>10);
+},{passive:true});
+
+// ---------- scroll reveal ----------
+const io = new IntersectionObserver((entries)=>{
+  entries.forEach(en=>{ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target);} });
+},{threshold:0.15});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+// ---------- 3D badge drag rotate ----------
+const badge = document.getElementById('badge3d');
+let rotX = 8, rotY = -14, dragging=false, lastX=0, lastY=0, autoSpin=true;
+function applyRot(){ badge.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg)`; }
+applyRot();
+function startDrag(x,y){ dragging=true; autoSpin=false; lastX=x; lastY=y; }
+function moveDrag(x,y){
+  if(!dragging) return;
+  rotY += (x-lastX)*0.4;
+  rotX -= (y-lastY)*0.4;
+  rotX = Math.max(-40,Math.min(40,rotX));
+  lastX=x; lastY=y; applyRot();
+}
+function endDrag(){ dragging=false; }
+badge.addEventListener('mousedown',e=>startDrag(e.clientX,e.clientY));
+window.addEventListener('mousemove',e=>moveDrag(e.clientX,e.clientY));
+window.addEventListener('mouseup',endDrag);
+badge.addEventListener('touchstart',e=>{const t=e.touches[0];startDrag(t.clientX,t.clientY);},{passive:true});
+window.addEventListener('touchmove',e=>{const t=e.touches[0];moveDrag(t.clientX,t.clientY);},{passive:true});
+window.addEventListener('touchend',endDrag);
+
+let raf;
+function autoTick(){
+  if(autoSpin && !dragging){ rotY += 0.08; applyRot(); }
+  raf = requestAnimationFrame(autoTick);
+}
+if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){ autoTick(); }
+
+// resume gentle autospin after inactivity
+let idleTimer;
+window.addEventListener('mouseup',()=>{
+  clearTimeout(idleTimer);
+  idleTimer = setTimeout(()=>{ autoSpin = true; }, 2500);
+});
+
+// ---------- badge meaning interactivity ----------
+const meaningData = {
+  blue:{bm:['Biru','Bermaksud perpaduan semua warga Kolej Tingkatan Enam Desa Mahkota.'],en:['Blue','Represents the unity of all members of the KTEDM community.']},
+  red:{bm:['Merah','Bermaksud semangat waja dan dedikasi kepada visi dan misi.'],en:['Red','Represents steely spirit and dedication to the vision and mission.']},
+  gold:{bm:['Kuning','Bermaksud kesetiaan kepada institusi.'],en:['Gold','Represents loyalty to the institution.']},
+  white:{bm:['Putih','Bermaksud ketelusan di dalam menyampai dan menuntut ilmu.'],en:['White','Represents transparency in imparting and seeking knowledge.']},
+  black:{bm:['Hitam','Bermaksud kecekalan di dalam menempuh cabaran.'],en:['Black','Represents perseverance in facing challenges.']},
+  buku:{bm:['Buku','Bermaksud kepelbagaian disiplin ilmu.'],en:['Book','Represents the diversity of academic disciplines.']},
+  skrol:{bm:['Skrol','Bermaksud segulung ijazah dijadikan matlamat.'],en:['Scroll','Represents a degree scroll as the ultimate goal.']},
+  mortar:{bm:['Mortar Board','Bermaksud kesinambungan menuntut ilmu ke peringkat lebih tinggi.'],en:['Mortar Board','Represents the continuity of learning to higher levels.']},
+  perisai:{bm:['Perisai','Bermaksud sentiasa bersedia.'],en:['Shield','Represents constant readiness.']}
+};
+const meaningDisplay = document.getElementById('meaningDisplay');
+function showMeaning(key){
+  const d = meaningData[key]; if(!d) return;
+  meaningDisplay.innerHTML = `<h4 data-bm>${d.bm[0]}</h4><h4 data-en>${d.en[0]}</h4><p data-bm>${d.bm[1]}</p><p data-en>${d.en[1]}</p>`;
+  const isEn = document.body.classList.contains('lang-en');
+}
+document.getElementById('swatches').addEventListener('click',e=>{
+  const sw = e.target.closest('.swatch'); if(!sw) return;
+  document.querySelectorAll('.swatch').forEach(s=>s.classList.remove('active'));
+  sw.classList.add('active');
+  showMeaning(sw.dataset.key);
+});
+document.getElementById('symbols').addEventListener('click',e=>{
+  const c = e.target.closest('.sym-card'); if(!c) return;
+  showMeaning(c.dataset.key);
+});
+
+// ---------- academic tabs ----------
+document.querySelectorAll('.tab-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const tab = btn.dataset.tab;
+    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.toggle('active', b.dataset.tab===tab));
+    document.querySelectorAll('.tab-panel').forEach(p=>p.classList.toggle('active', p.dataset.panel===tab));
+  });
+});
+
+// ---------- active nav link on scroll ----------
+const sections = ['tentang','akademik','kampus','pasukan','hubungi'].map(id=>document.getElementById(id));
+const navA = document.querySelectorAll('nav.links a');
+const navObs = new IntersectionObserver(entries=>{
+  entries.forEach(en=>{
+    if(en.isIntersecting){
+      navA.forEach(a=>a.classList.toggle('active', a.getAttribute('href')==='#'+en.target.id));
+    }
+  });
+},{rootMargin:'-40% 0px -55% 0px'});
+sections.forEach(s=>s && navObs.observe(s));
+</script>
+</body>
+</html>
